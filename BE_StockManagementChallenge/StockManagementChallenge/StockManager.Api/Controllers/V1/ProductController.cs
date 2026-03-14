@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ROP.APIExtensions;
+using StockManager.Application.DTOs.Product.Request;
 
 namespace StockManagerApi.Controllers.V1
 {
@@ -30,12 +31,12 @@ namespace StockManagerApi.Controllers.V1
             return new string[] { "value1", "value2" };
         }
 
-       
-
-        // POST api/<ProductController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] ProductCreateRequest request)
         {
+            var cmmd = new StockManager.Application.UsesCases.Product.Create.ProductCreateCommand(request);
+            var product = await _mediator.Send(cmmd);
+            return product.ToActionResult();
         }
 
         // PUT api/<ProductController>/5
