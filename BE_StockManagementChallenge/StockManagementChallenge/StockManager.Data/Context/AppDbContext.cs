@@ -10,8 +10,8 @@ namespace StockManager.Data.Context
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ProductoSpResult>().HasNoKey();
-            modelBuilder.Entity<ProductoCreateSpResult>().HasNoKey();
+            modelBuilder.Entity<ProductSpResult>().HasNoKey();
+            modelBuilder.Entity<ProductIdSpResult>().HasNoKey();
             modelBuilder.Entity<UserSpResult>().HasNoKey();
         }
     }

@@ -6,11 +6,11 @@ using StockManager.Application.Interfaces;
 
 namespace StockManager.Application.UsesCases.Product.Create
 {
-    public class ProductCreateHandler(IProductoRepository productoRepository, ICurrentUser currentUser) : IRequestHandler<ProductCreateCommand, Result<ProductCreateResponse>>
+    public class ProductCreateHandler(IProductoRepository productoRepository, ICurrentUser currentUser) : IRequestHandler<ProductCreateCommand, Result<ProductResponse>>
     {
-        public async Task<Result<ProductCreateResponse>> Handle(ProductCreateCommand request, CancellationToken cancellationToken)
+        public async Task<Result<ProductResponse>> Handle(ProductCreateCommand request, CancellationToken cancellationToken)
         {
-            var req = new ProductCreateModel
+            var req = new ProductModel
             {
                 Categoria = request.Categoria,
                 Descripcion = request.Descripcion.ToUpper(),
@@ -19,7 +19,7 @@ namespace StockManager.Application.UsesCases.Product.Create
             };
 
             var result = await productoRepository.Create(req)
-                                .Map(id => new ProductCreateResponse { Id = id});
+                                .Map(id => new ProductResponse { Id = id});
             return result;
         }
     }

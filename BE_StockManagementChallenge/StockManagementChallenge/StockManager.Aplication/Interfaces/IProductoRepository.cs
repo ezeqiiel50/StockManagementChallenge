@@ -6,8 +6,9 @@ namespace StockManager.Application.Interfaces
 {
     public interface IProductoRepository
     {
-        Task<Result<int>> Create(ProductCreateModel model);
+        Task<Result<int>> Create(ProductModel model);
         Task<Result<Unit>> Delete(int Id);
-        Task<Result<ProductoResponse>> GetById(int Id);
+        Task<Result<ProductItemResponse>> GetById(int Id);
+        Task<Result<Unit>> Update(ProductModel model, int Id);
     }
 }

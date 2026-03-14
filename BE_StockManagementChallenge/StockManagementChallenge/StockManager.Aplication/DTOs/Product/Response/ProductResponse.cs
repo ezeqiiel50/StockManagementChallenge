@@ -1,6 +1,6 @@
 ﻿namespace StockManager.Application.DTOs.Product.Response
 {
-    public class ProductCreateResponse
+    public class ProductResponse
     {
         public int Id { get; set; }
     }

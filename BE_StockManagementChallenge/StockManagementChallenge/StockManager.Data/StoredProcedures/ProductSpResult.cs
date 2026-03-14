@@ -1,6 +1,6 @@
 ﻿namespace StockManager.Data.StoredProcedures
 {
-    public class ProductoSpResult
+    public class ProductSpResult
     {
         public int Id { get; set; }
         public string Description { get; set; } = null!;
