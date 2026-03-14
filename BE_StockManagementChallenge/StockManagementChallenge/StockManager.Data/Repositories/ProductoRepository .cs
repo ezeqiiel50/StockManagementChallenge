@@ -43,5 +43,28 @@ namespace StockManager.Data.Repositories
                 return Result.Failure<ProductoResponse>("Ah ocurrido un error al obtener el producto.");
             }
         }
+
+        public async Task<Result<ROP.Unit>> Delete(int Id)
+        {
+            try
+            {
+                var param = new SqlParameter("@Id", Id);
+
+                var rowsAffected = await context.Database.ExecuteSqlRawAsync("EXEC sp_DeleteProduct @Id", param);
+
+                if (rowsAffected == 0)
+                {
+                    logger.LogInformation("No se elimino el producto.");
+                    return Result.Failure<ROP.Unit>("No se elimino el producto.");
+                }
+
+                return Result.Success();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Ha ocurrido un error al eliminar el producto");
+                return Result.Failure<ROP.Unit>("Ha ocurrido un error al eliminar el producto.");
+            }
+        }
     }
 }

@@ -8,20 +8,9 @@ CREATE PROCEDURE sp_CreateProduct
     @CreatedBy INT
 AS
 BEGIN
-    INSERT INTO Products
-    (
-        Price,
-        Category,
-        CreatedAt,
-        CreatedBy
-    )
-    VALUES
-    (
-        @Price,
-        @Category,
-        GETUTCDATE(),
-        @CreatedBy
-    );
+    INSERT INTO Products ( Price,Category,CreatedAt, CreatedBy )
+    VALUES(@Price,@Category, GETUTCDATE(), @CreatedBy );
+	SELECT SCOPE_IDENTITY() AS Id;
 END
 GO
 -- =============================================
@@ -59,12 +48,9 @@ CREATE PROCEDURE sp_UpdateProduct
 AS
 BEGIN
     UPDATE Products
-    SET
-        Price = @Price,
-        Category = @Category,
-        UpdatedAt = GETUTCDATE(),
-        UpdatedBy = @UpdatedBy
+    SET Price = @Price, Category = @Category, UpdatedAt = GETUTCDATE(),UpdatedBy = @UpdatedBy
     WHERE Id = @Id;
+	SELECT @@ROWCOUNT AS AffectedRows;
 END
 GO
 -- =============================================
@@ -77,6 +63,7 @@ AS
 BEGIN
     DELETE FROM Products
     WHERE Id = @Id;
+	SELECT @@ROWCOUNT AS AffectedRows;
 END
 GO
 -- =============================================
@@ -86,7 +73,6 @@ CREATE PROCEDURE sp_GetUserByUsername
     @Username NVARCHAR(100)
 AS
 BEGIN
-
     SELECT Id,UserName,PasswordHash
     FROM Users
     WHERE Username = @Username;

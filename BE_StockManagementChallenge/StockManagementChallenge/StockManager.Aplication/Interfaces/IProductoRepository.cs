@@ -5,6 +5,7 @@ namespace StockManager.Application.Interfaces
 {
     public interface IProductoRepository
     {
+        Task<Result<Unit>> Delete(int Id);
         Task<Result<ProductoResponse>> GetById(int Id);
     }
 }
