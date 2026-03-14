@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ROP.APIExtensions;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace StockManagerApi.Controllers.V1
 {
