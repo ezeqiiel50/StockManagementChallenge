@@ -36,9 +36,9 @@ StockManagementChallenge/
 
 ## Configuración
 1. Clonar el repositorio
-2. Configurar el `appsettings.Development.json` con la conexion del motor de base datos
-3. Completar la connection string y JWT key
-4. Ejecutar los scripts SQL de la carpeta `Database/Scripts`
+2. Ejecutar los scripts SQL de la carpeta `Database/Scripts`
+3. Configurar el `appsettings.Development.json` con la conexion del motor de base datos
+4. Completar la connection string y JWT key
 5. Correr la API
 
 ## Endpoints
