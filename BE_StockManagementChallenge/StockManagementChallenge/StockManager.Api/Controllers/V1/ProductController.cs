@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Azure.Core;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ROP.APIExtensions;
@@ -32,7 +33,7 @@ namespace StockManagerApi.Controllers.V1
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] ProductCreateRequest request)
+        public async Task<IActionResult> Post([FromBody] ProductRequest request)
         {
             var cmmd = new StockManager.Application.UsesCases.Product.Create.ProductCreateCommand(request);
             var product = await _mediator.Send(cmmd);
@@ -41,8 +42,11 @@ namespace StockManagerApi.Controllers.V1
 
         // PUT api/<ProductController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(int id, [FromBody] ProductRequest request)
         {
+            var cmmd = new StockManager.Application.UsesCases.Product.Update.ProductUpdateCommand(request, id);
+            var product = await _mediator.Send(cmmd);
+            return product.ToActionResult();
         }
 
         [HttpDelete("{id}")]

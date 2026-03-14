@@ -12,13 +12,13 @@ namespace StockManager.Data.Repositories
 {
     public class ProductoRepository(ILogger<ProductoRepository> logger, AppDbContext context) : IProductoRepository
     {
-        public async Task<Result<ProductoResponse>> GetById(int Id)
+        public async Task<Result<ProductItemResponse>> GetById(int Id)
         {
             try
             {
                 var param = new SqlParameter("@Id", Id);
 
-                var spResult = await context.Set<ProductoSpResult>()
+                var spResult = await context.Set<ProductSpResult>()
                                             .FromSqlRaw("EXEC sp_GetProductById @Id", param)
                                             .ToListAsync();
 
@@ -26,10 +26,10 @@ namespace StockManager.Data.Repositories
                 if (item is null)
                 {
                     logger.LogInformation("No se encontró el producto.");
-                    return Result.NotFound<ProductoResponse>("No se encontró el producto.");
+                    return Result.NotFound<ProductItemResponse>("No se encontró el producto.");
                 }
 
-                var result = new ProductoResponse
+                var result = new ProductItemResponse
                 {
                     Id = item.Id,
                     Descripcion = item.Description,
@@ -42,7 +42,7 @@ namespace StockManager.Data.Repositories
             catch (Exception ex)
             {
                 logger.LogError(ex, "Ah ocurrido un error al obtener el producto");
-                return Result.Failure<ProductoResponse>("Ah ocurrido un error al obtener el producto.");
+                return Result.Failure<ProductItemResponse>("Ah ocurrido un error al obtener el producto.");
             }
         }
 
@@ -75,11 +75,11 @@ namespace StockManager.Data.Repositories
             }
         }
 
-        public async Task<Result<int>> Create(ProductCreateModel model)
+        public async Task<Result<int>> Create(ProductModel model)
         {
             try
             {
-                var spResult = await context.Set<ProductoCreateSpResult>()
+                var spResult = await context.Set<ProductSpResult>()
                                             .FromSqlRaw("EXEC sp_CreateProduct @Price, @Description, @Category, @CreatedBy",
                                                 new SqlParameter("@Price", model.Precio),
                                                 new SqlParameter("@Description", model.Descripcion),
@@ -106,6 +106,47 @@ namespace StockManager.Data.Repositories
             {
                 logger.LogError(ex, "Ha ocurrido un error al crear el producto.");
                 return Result.Failure<int>("Ha ocurrido un al crear el producto.");
+            }
+        }
+
+        public async Task<Result<ROP.Unit>> Update(ProductModel model, int Id)
+        {
+            try
+            {
+                var spResult = await context.Set<ProductIdSpResult>()
+                                            .FromSqlRaw("EXEC sp_UpdateProduct @Id, @Price, @Description, @Category, @UpdatedBy",
+                                                new SqlParameter("@Id", Id),
+                                                new SqlParameter("@Price", model.Precio),
+                                                new SqlParameter("@Description", model.Descripcion),
+                                                new SqlParameter("@Category", model.Categoria),
+                                                new SqlParameter("@UpdatedBy", model.UserId))
+                                            .ToListAsync();
+
+                var newId = spResult.FirstOrDefault()?.Id;
+                if (newId == -1)
+                {
+                    logger.LogInformation("No se encontró el producto con ese Id");
+                    return Result.NotFound<ROP.Unit>("No se encontró el producto.");
+                }
+
+                if (newId == -2)
+                {
+                    logger.LogInformation("Ya existe un producto con la descripción");
+                    return Result.Failure<ROP.Unit>("Ya existe un producto con esa descripción.");
+                }
+
+                if (newId is null || newId == 0)
+                {
+                    logger.LogInformation("No se pudo modificar el producto.");
+                    return Result.Failure<ROP.Unit>("No se pudo modificar el producto.");
+                }
+
+                return Result.Success();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Ha ocurrido un error al modificar el producto.");
+                return Result.Failure<ROP.Unit>("Ha ocurrido un al modificar el producto.");
             }
         }
     }

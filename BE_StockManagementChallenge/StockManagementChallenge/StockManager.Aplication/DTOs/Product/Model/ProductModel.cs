@@ -1,6 +1,6 @@
 ﻿namespace StockManager.Application.DTOs.Product.Model
 {
-    public class ProductCreateModel
+    public class ProductModel
     {
         public string Descripcion { get; set; } = null!;
         public int Precio { get; set; }

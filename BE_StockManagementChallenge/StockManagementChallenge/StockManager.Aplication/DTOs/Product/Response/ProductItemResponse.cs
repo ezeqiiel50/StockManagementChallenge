@@ -1,6 +1,6 @@
 ﻿namespace StockManager.Application.DTOs.Product.Response
 {
-    public class ProductoResponse
+    public class ProductItemResponse
     {
         public int Id { get; set; }
         public string Descripcion { get; set; } = null!;
