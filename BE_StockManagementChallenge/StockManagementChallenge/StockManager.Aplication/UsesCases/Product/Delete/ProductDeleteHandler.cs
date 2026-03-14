@@ -1,13 +1,16 @@
 ﻿using MediatR;
 using ROP;
+using StockManager.Application.Interfaces;
 
 namespace StockManager.Application.UsesCases.Product.Delete
 {
-    public class ProductDeleteHandler() : IRequestHandler<ProductDeleteCommand, Result<ROP.Unit>>
+    public class ProductDeleteHandler(IProductoRepository productoRepository) : IRequestHandler<ProductDeleteCommand, Result<ROP.Unit>>
     {
-        public Task<Result<ROP.Unit>> Handle(ProductDeleteCommand request, CancellationToken cancellationToken)
+        public async Task<Result<ROP.Unit>> Handle(ProductDeleteCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var result = await productoRepository.GetById(request.Id)
+                                .Bind(_ => productoRepository.Delete(request.Id));
+            return result;
         }
     }
 }

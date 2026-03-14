@@ -8,7 +8,7 @@ namespace StockManager.Application.UsesCases.Product.Delete
         {
             RuleFor(x => x.Id)
                 .NotNull()
-                .GreaterThan(0).WithMessage("{PropertyName} no es valida.");
+                .GreaterThan(0).WithMessage("{PropertyName} no es valido.");
         }
     }
 }
