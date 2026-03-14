@@ -44,10 +44,12 @@ namespace StockManagerApi.Controllers.V1
         {
         }
 
-        // DELETE api/<ProductController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            var cmmd = new StockManager.Application.UsesCases.Product.Delete.ProductDeleteCommand(id);
+            var product = await _mediator.Send(cmmd);
+            return product.ToActionResult();
         }
     }
 }
