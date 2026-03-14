@@ -14,11 +14,25 @@ REST API desarrollada en .NET 8 con Clean Architecture.
 - Netmentor.ROP
 
 ## Estructura
-├── 01-Api          → Controllers, Middleware, Services
-├── 02-Application  → Handlers, Interfaces, DTOs, Validators
-├── 03-Domain       → Entities
-├── 04-Data         → Repositories, DbContext, StoredProcedures
-└── 05-Test         → Unit Tests
+```
+StockManagementChallenge/
+├── 01-Api/
+│   ├── Controllers/
+│   ├── Middleware/
+│   └── Services/
+├── 02-Application/
+│   ├── Handlers/
+│   ├── Interfaces/
+│   ├── DTOs/
+│   └── Validators/
+├── 03-Domain/
+│   └── Entities/
+├── 04-Data/
+│   ├── Repositories/
+│   ├── Context/
+│   └── StoredProcedures/
+└── 05-Test/
+```
 
 ## Configuración
 1. Clonar el repositorio
@@ -39,14 +53,14 @@ Los scripts de base de datos están en `Database/Scripts`: se los debe correr en
 |--------|------|-------------|------|
 | POST | /api/auth/login | Login | ❌ |
 | GET | /api/productos/{id} | Obtener producto por un Id determinado | ✅ |
-```
 
----
 
 ## 5. Carpeta Scripts con los SQL
+## Scripts SQL
 ```
-📁 Scripts
- ├── 01_CreateDatabase.sql
- ├── 02_CreateTables.sql
- ├── 03_StoredProcedures.sql
- └── 04_SeedData.sql
+Scripts/
+├── 01_CreateDatabase.sql
+├── 02_CreateTables.sql
+├── 03_StoredProcedures.sql
+└── 04_SeedData.sql
+```
