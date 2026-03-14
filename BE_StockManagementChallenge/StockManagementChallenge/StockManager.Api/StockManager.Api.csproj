@@ -26,12 +26,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\V1\Examples\" />
+    <ProjectReference Include="..\StockManager.Aplication\StockManager.Application.csproj" />
+    <ProjectReference Include="..\StockManager.Data\StockManager.Data.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\StockManager.Aplication\StockManager.Application.csproj" />
-    <ProjectReference Include="..\StockManager.Data\StockManager.Data.csproj" />
+    <Folder Include="logs\" />
   </ItemGroup>
 
 </Project>

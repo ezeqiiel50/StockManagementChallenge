@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using ROP;
-using StockManager.Application.DTOs.Product;
+using StockManager.Application.DTOs.Product.Response;
 using StockManager.Application.Interfaces;
 
 namespace StockManager.Application.UsesCases.Product.GetById

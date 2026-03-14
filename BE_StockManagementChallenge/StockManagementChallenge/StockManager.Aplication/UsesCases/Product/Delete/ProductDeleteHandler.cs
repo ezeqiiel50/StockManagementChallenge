@@ -8,8 +8,7 @@ namespace StockManager.Application.UsesCases.Product.Delete
     {
         public async Task<Result<ROP.Unit>> Handle(ProductDeleteCommand request, CancellationToken cancellationToken)
         {
-            var result = await productoRepository.GetById(request.Id)
-                                .Bind(_ => productoRepository.Delete(request.Id));
+            var result = await productoRepository.Delete(request.Id);
             return result;
         }
     }

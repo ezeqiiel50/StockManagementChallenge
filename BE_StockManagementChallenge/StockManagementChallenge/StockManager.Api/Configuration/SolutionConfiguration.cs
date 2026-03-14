@@ -39,6 +39,7 @@ namespace StockManagerApi.Configuration
             builder.Services.AddValidatorsFromAssemblyContaining<ApplicationAssemblyReference>();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
             return builder;
         }
 
@@ -73,7 +74,11 @@ namespace StockManagerApi.Configuration
         }
         private static WebApplicationBuilder ConfigureAuth(this WebApplicationBuilder builder)
         {
+            builder.Services.AddHttpContextAccessor();
+
+            builder.Services.AddScoped<ICurrentUser, CurrentUser>();
             builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                             .AddJwtBearer(options =>
                             {

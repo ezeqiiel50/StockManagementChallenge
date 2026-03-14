@@ -13,13 +13,13 @@ BEGIN TRY
     -- PRODUCTS
     -- =============================================
     -- Se asume que el usuario admin tiene Id = 1
-    INSERT INTO Products (Price, Category, CreatedBy, UpdatedBy)
+    INSERT INTO Products (Price, Description, Category, CreatedBy)
     VALUES
-    (10, 'PRODDOS', 1, NULL),
-    (60, 'PRODUNO', 1, NULL),
-    (5, 'PRODDOS', 1, NULL),
-    (5, 'PRODUNO', 1, NULL),
-    (15, 'PRODDOS', 1, NULL);
+    (10,'PRODUCTO A', 'PRODDOS', 1),
+    (60,'PRODUCTO B','PRODUNO', 1),
+    (5, 'PRODUCTO C', 'PRODDOS', 1),
+    (5, 'PRODUCTO D','PRODUNO', 1),
+    (15,'PRODUCTO E','PRODDOS', 1);
 
     COMMIT TRANSACTION;
 END TRY
