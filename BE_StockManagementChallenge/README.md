@@ -41,26 +41,15 @@ StockManagementChallenge/
 4. Ejecutar los scripts SQL de la carpeta `Database/Scripts`
 5. Correr la API
 
-## Scripts SQL
-Los scripts de base de datos están en `Database/Scripts`: se los debe correr en el orden que estan enumerados
-- `01_CreateDatabase.sql`
-- `02_CreateTables.sql`  
-- `03_StoredProcedures.sql`
-- `04_SeedData.sql`
-
 ## Endpoints
 | Método | Ruta | Descripción | Auth |
 |--------|------|-------------|------|
 | POST | /api/auth/login | Login | ❌ |
 | GET | /api/productos/{id} | Obtener producto por un Id determinado | ✅ |
 
-
-## 5. Carpeta Scripts con los SQL
 ## Scripts SQL
-```
-Scripts/
-├── 01_CreateDatabase.sql
-├── 02_CreateTables.sql
-├── 03_StoredProcedures.sql
-└── 04_SeedData.sql
-```
+Los scripts de base de datos están en `Database/Scripts`: se los debe correr en el orden que estan enumerados
+- `01_CreateDatabase.sql`
+- `02_CreateTables.sql`  
+- `03_StoredProcedures.sql`
+- `04_SeedData.sql`
