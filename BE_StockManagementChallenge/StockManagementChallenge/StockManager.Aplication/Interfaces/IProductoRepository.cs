@@ -8,6 +8,7 @@ namespace StockManager.Application.Interfaces
     {
         Task<Result<int>> Create(ProductModel model);
         Task<Result<Unit>> Delete(int Id);
+        Task<Result<List<ProductItemResponse>>> GetAll();
         Task<Result<ProductItemResponse>> GetById(int Id);
         Task<Result<Unit>> Update(ProductModel model, int Id);
     }

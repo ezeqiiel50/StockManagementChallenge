@@ -17,7 +17,7 @@ namespace StockManager.Application.UsesCases.Login
 
         private async Task<Result<LoginResponse>> LoginUser(LoginUserQuery request)
         {
-            var result = await authRepository.GetUserByUswerName(request.User)
+            var result = await authRepository.GetUserByUserName(request.User)
                                 .Bind(x => ValidarPassword(x, request))
                                 .Bind(x => jwtService.GenerateToken(x))
                                 .Map(x => new LoginResponse

@@ -8,7 +8,7 @@
         public string Category { get; set; } = null!;
         public int CreatedBy { get; set; }
         public DateTime CreatedAt { get; set; }
-        public int? UpdatedBy { get; set; }
-        public DateTime? UpdatedAt { get; set; }
+        public int? UpdatedBy { get; set; } = default;
+        public DateTime? UpdatedAt { get; set; } = default;
     }
 }

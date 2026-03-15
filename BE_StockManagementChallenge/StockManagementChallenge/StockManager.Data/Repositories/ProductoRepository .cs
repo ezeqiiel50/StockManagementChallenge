@@ -41,8 +41,8 @@ namespace StockManager.Data.Repositories
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Ah ocurrido un error al obtener el producto");
-                return Result.Failure<ProductItemResponse>("Ah ocurrido un error al obtener el producto.");
+                logger.LogError(ex, "Ha ocurrido un error al obtener el producto.");
+                return Result.Failure<ProductItemResponse>("Ha ocurrido un error al obtener el producto.");
             }
         }
 
@@ -147,6 +147,34 @@ namespace StockManager.Data.Repositories
             {
                 logger.LogError(ex, "Ha ocurrido un error al modificar el producto.");
                 return Result.Failure<ROP.Unit>("Ha ocurrido un al modificar el producto.");
+            }
+        }
+
+        public async Task<Result<List<ProductItemResponse>>> GetAll()
+        {
+            try
+            {
+                var spResult = await context.Set<ProductSpResult>()
+                                            .FromSqlRaw("EXEC sp_GetProducts")
+                                            .ToListAsync() ?? [];
+
+                var items = spResult.Select(item => new ProductItemResponse
+                {
+                    Id = item.Id,
+                    Descripcion = item.Description,
+                    Precio = item.Price,
+                    Categoria = item.Category,
+                    FechaCarga = item.CreatedAt.ToString("dd/MM/yyyy")
+                })
+                .OrderBy(x => x.Descripcion)
+                .ToList();
+
+                return items;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Ha ocurrido un error al obtener los productos.");
+                return Result.Failure<List<ProductItemResponse>>("Ha ocurrido un error al obtener los productos.");
             }
         }
     }

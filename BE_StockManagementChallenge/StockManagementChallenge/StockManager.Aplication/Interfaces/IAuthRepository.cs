@@ -5,6 +5,6 @@ namespace StockManager.Application.Interfaces
 {
     public interface IAuthRepository
     {
-        Task<Result<UserData>> GetUserByUswerName(string userName);
+        Task<Result<UserData>> GetUserByUserName(string userName);
     }
 }
