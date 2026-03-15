@@ -178,6 +178,7 @@ El mensaje se muestra al usuario.
 # ▶️ Instalacion
 
 1° Clonar el repositorio
+
 2° Instalar dependencias:
 ```bash
 npm install
