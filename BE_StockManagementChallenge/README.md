@@ -1,84 +1,63 @@
-# ğŸ“¦ Stock Management Challenge
+# ?? Stock Management Challenge
 
-REST API desarrollada en **.NET 8** siguiendo principios de **Clean Architecture** para la gestiÃ³n de productos y autenticaciÃ³n de usuarios, aplicando el **PatrÃ³n Mediator**, **InyecciÃ³n de Dependencias** y **PatrÃ³n Repository** con **Stored Procedures** bajo los principios **ACID**.
+REST API desarrollada en **.NET 8** siguiendo principios de **Clean Architecture** para la gesti¨®n de productos y autenticaci¨®n de usuarios, aplicando el **Patr¨®n Mediator**, **Inyecci¨®n de Dependencias** y **Patr¨®n Repository** con **Stored Procedures** bajo los principios **ACID**.
 
 ---
 
-## ğŸ› ï¸ TecnologÃ­as y Patrones
+## ??? Tecnolog¨ªas y Patrones
 
 - **Framework:** .NET 8
 - **Base de datos:** SQL Server
-- **ORM:** Entity Framework Core (solo para ejecuciÃ³n de Stored Procedures)
-- **AutenticaciÃ³n:** JWT Bearer
-- **EncriptaciÃ³n:** BCrypt
+- **ORM:** Entity Framework Core (solo para ejecuci¨®n de Stored Procedures)
+- **Autenticaci¨®n:** JWT Bearer
+- **Encriptaci¨®n:** BCrypt
 - **Logs:** Serilog
 - **Patrones:** Clean Architecture, Repository, Mediator, Result Pattern (ROP)
 - **Principios:** SOLID, ACID
-- **LibrerÃ­as:** MediatR, FluentValidation, Netmentor.ROP, Moq, FluentAssertions
+- **Librer¨ªas:** MediatR, FluentValidation, Netmentor.ROP, Moq, FluentAssertions
 
 ---
 
-## ğŸ—ï¸ Estructura del Proyecto
+## ??? Estructura del Proyecto
 ```
 StockManagementChallenge/
-â”œâ”€â”€ 01-Api/
-â”‚   â”œâ”€â”€ Controllers/
-â”‚   â”œâ”€â”€ Middleware/
-â”‚   â””â”€â”€ Services/
-â”œâ”€â”€ 02-Application/
-â”‚   â”œâ”€â”€ Handlers/
-â”‚   â”œâ”€â”€ Interfaces/
-â”‚   â”œâ”€â”€ DTOs/
-â”‚   â””â”€â”€ Validators/
-â”œâ”€â”€ 03-Domain/
-â”œâ”€â”€ 04-Data/
-â”‚   â”œâ”€â”€ Repositories/
-â”‚   â”œâ”€â”€ Context/
-â”‚   â””â”€â”€ StoredProcedures/
-â””â”€â”€ 05-Test/
-    â”œâ”€â”€ Category/
-    â”œâ”€â”€ Login/
-    â””â”€â”€ Product/
+©À©¤©¤ 01-Api/
+©¦	©À©¤©¤ Configuration/
+©¦   ©À©¤©¤ Controllers/
+©¦   ©À©¤©¤ Middleware/
+©¦   ©¸©¤©¤ Services/
+©À©¤©¤ 02-Application/
+©¦   ©À©¤©¤ Behaviors/
+©¦	©À©¤©¤ DTOs/
+©¦   ©À©¤©¤ Interfaces/
+©¦   ©¸©¤©¤ UsesCases/
+©À©¤©¤ 03-Domain/
+©À©¤©¤ 04-Data/
+©¦   ©À©¤©¤ Repositories/
+©¦   ©À©¤©¤ Context/
+©¦   ©¸©¤©¤ StoredProcedures/
+©À©¤©¤ 05-Test/
+©¦   ©À©¤©¤ Category/
+©¦   ©À©¤©¤ Login/
+©¦   ©¸©¤©¤ Product/
 ```
 
 ---
 
-## âš™ï¸ ConfiguraciÃ³n
+## ?? Configuraci¨®n
 
 1. Clonar el repositorio
-```bash
-git clone https://github.com/tu-usuario/StockManagementChallenge.git
-cd StockManagementChallenge
-```
-
 2. Ejecutar los scripts SQL de la carpeta `Database/Scripts` en el orden enumerado
-3. Crear el archivo `appsettings.Development.json` con la siguiente estructura:
-```json
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Database=StockManagementChallenge;User Id=tu_usuario;Password=tu_password;TrustServerCertificate=True;"
-  },
-  "Jwt": {
-    "Key": "tu-clave-secreta-minimo-32-caracteres",
-    "Issuer": "StockManagementChallenge",
-    "Audience": "StockManagementChallenge"
-  }
-}
-```
-
-4. Correr la API
-```bash
-dotnet run --project 01-Api
-```
+3. Correr la API
 
 ---
 
-## ğŸ” AutenticaciÃ³n
+## ?? Autenticaci¨®n
 
 La API usa **JWT Bearer**. Para acceder a los endpoints protegidos:
 
-1. RealizÃ¡ login en `POST /api/auth/login`
-2. CopiÃ¡ el token de la respuesta
+1. Realiz¨¢ login en `POST /api/auth/login`
+2. Copi¨¢ el token de la respuesta
 3. Envialo en el header de cada request:
 ```
 Authorization: Bearer {token}
@@ -86,67 +65,67 @@ Authorization: Bearer {token}
 
 ---
 
-## ğŸ“Œ Endpoints
+## ?? Endpoints
 
 ### Auth
-| MÃ©todo | Ruta | DescripciÃ³n | Auth |
+| M¨¦todo | Ruta | Descripci¨®n | Auth |
 |--------|------|-------------|------|
-| POST | `/api/auth/login` | Iniciar sesiÃ³n | âŒ |
+| POST | `/api/auth/login` | Iniciar sesi¨®n | ? |
 
 ### Category
-| MÃ©todo | Ruta | DescripciÃ³n | Auth |
+| M¨¦todo | Ruta | Descripci¨®n | Auth |
 |--------|------|-------------|------|
-| GET | `/api/Category` | Obtener lista de categorÃ­as | âœ… |
+| GET | `/api/Category` | Obtener lista de categor¨ªas | ? |
 
 ### Product
-| MÃ©todo | Ruta | DescripciÃ³n | Auth |
+| M¨¦todo | Ruta | Descripci¨®n | Auth |
 |--------|------|-------------|------|
-| GET | `/api/Product` | Obtener todos los productos | âœ… |
-| GET | `/api/Product/{id}` | Obtener producto por Id | âœ… |
-| POST | `/api/Product` | Crear un producto | âœ… |
-| PUT | `/api/Product/{id}` | Modificar un producto por Id | âœ… |
-| DELETE | `/api/Product/{id}` | Eliminar un producto por Id | âœ… |
-| GET | `/api/Product/filter/{monto}` | Obtener productos de distintas categorÃ­as que se ajusten al monto | âœ… |
+| GET | `/api/Product` | Obtener todos los productos | ? |
+| GET | `/api/Product/{id}` | Obtener producto por Id | ? |
+| POST | `/api/Product` | Crear un producto | ? |
+| PUT | `/api/Product/{id}` | Modificar un producto por Id | ? |
+| DELETE | `/api/Product/{id}` | Eliminar un producto por Id | ? |
+| GET | `/api/Product/filter/{monto}` | Obtener productos de distintas categor¨ªas que se ajusten al monto | ? |
 
 ---
 
-## ğŸ“ Principios aplicados
+## ?? Principios aplicados
 
 ### SOLID
-- **S** â€” Cada clase tiene una Ãºnica responsabilidad
-- **O** â€” Abierto para extensiÃ³n, cerrado para modificaciÃ³n
-- **L** â€” Las implementaciones respetan los contratos de sus interfaces
-- **I** â€” Interfaces especÃ­ficas por dominio
-- **D** â€” Las capas dependen de abstracciones, no de implementaciones concretas
+- **S** ¡ª Cada clase tiene una ¨²nica responsabilidad
+- **O** ¡ª Abierto para extensi¨®n, cerrado para modificaci¨®n
+- **L** ¡ª Las implementaciones respetan los contratos de sus interfaces
+- **I** ¡ª Interfaces espec¨ªficas por dominio
+- **D** ¡ª Las capas dependen de abstracciones, no de implementaciones concretas
 
 ### ACID (Stored Procedures)
-- **Atomicidad** â€” Cada SP usa transacciones con `BEGIN/COMMIT/ROLLBACK`
-- **Consistencia** â€” Validaciones previas a cada escritura
-- **Aislamiento** â€” Uso de `UPDLOCK` y `HOLDLOCK` para evitar race conditions
-- **Durabilidad** â€” Los cambios confirmados persisten ante fallos
+- **Atomicidad** ¡ª Cada SP usa transacciones con `BEGIN/COMMIT/ROLLBACK`
+- **Consistencia** ¡ª Validaciones previas a cada escritura
+- **Aislamiento** ¡ª Uso de `UPDLOCK` y `HOLDLOCK` para evitar race conditions
+- **Durabilidad** ¡ª Los cambios confirmados persisten ante fallos
 
 ---
 
-## ğŸ”„ Flujo de una request
+## ?? Flujo de una request
 ```
 Controller
-  â””â”€â”€ Handler (MediatR)
-        â””â”€â”€ Repository
-              â””â”€â”€ Stored Procedure (SQL Server)
-                    â””â”€â”€ Resultado mapeado a DTO
-                          â””â”€â”€ Result<T> (ROP)
-                                â””â”€â”€ ToActionResult() â†’ HTTP Response
+  ©¸©¤©¤ Handler (MediatR)
+        ©¸©¤©¤ Repository
+              ©¸©¤©¤ Stored Procedure (SQL Server)
+                    ©¸©¤©¤ Resultado mapeado a DTO
+                          ©¸©¤©¤ Result<T> (ROP)
+                                ©¸©¤©¤ ToActionResult() ¡ú HTTP Response
 ```
 
 ---
 
-## ğŸ“‚ Scripts SQL
+## ?? Scripts SQL
 
-Los scripts de base de datos estÃ¡n en `Database/Scripts` y se deben correr en el orden enumerado:
+Los scripts de base de datos est¨¢n en `Database/Scripts` y se deben correr en el orden enumerado:
 ```
 Database/Scripts/
-â”œâ”€â”€ 01_CreateDatabase.sql
-â”œâ”€â”€ 02_CreateTables.sql
-â”œâ”€â”€ 03_StoredProcedures.sql
-â””â”€â”€ 04_SeedData.sql
+©À©¤©¤ 01_CreateDatabase.sql
+©À©¤©¤ 02_CreateTables.sql
+©À©¤©¤ 03_StoredProcedures.sql
+©¸©¤©¤ 04_SeedData.sql
 ```
