@@ -79,7 +79,7 @@ namespace StockManager.Data.Repositories
         {
             try
             {
-                var spResult = await context.Set<ProductSpResult>()
+                var spResult = await context.Set<ProductIdSpResult>()
                                             .FromSqlRaw("EXEC sp_CreateProduct @Price, @Description, @Category, @CreatedBy",
                                                 new SqlParameter("@Price", model.Precio),
                                                 new SqlParameter("@Description", model.Descripcion),

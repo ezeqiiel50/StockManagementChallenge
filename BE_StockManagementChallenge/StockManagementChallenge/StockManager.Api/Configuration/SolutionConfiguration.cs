@@ -24,7 +24,8 @@ namespace StockManagerApi.Configuration
                   .ConfigureMediatR()
                   .ConfigureDatabase()
                   .ConfigureService()
-                  .ConfigureAuth();
+                  .ConfigureAuth()
+                  .ConfigureCors();
         }
 
         private static WebApplicationBuilder ConfigureApplication(this WebApplicationBuilder builder)
@@ -99,6 +100,17 @@ namespace StockManagerApi.Configuration
         private static WebApplicationBuilder ConfigureService(this WebApplicationBuilder builder)
         {
             builder.Services.AddScoped<IJwtService, JwtService>();
+            return builder;
+        }
+        private static WebApplicationBuilder ConfigureCors(this WebApplicationBuilder builder)
+        {
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    policy => policy.AllowAnyOrigin()
+                                    .AllowAnyMethod()
+                                    .AllowAnyHeader());
+            });
             return builder;
         }
     }
