@@ -42,7 +42,7 @@ GO
 CREATE PROCEDURE sp_GetProducts
 AS
 BEGIN
- SELECT Id,Price,Category,CreatedAt, CreatedBy, UpdatedAt, UpdatedBy
+ SELECT Id, Price, Description, Category, CreatedAt, CreatedBy, UpdatedAt, UpdatedBy
  FROM Products;
 END
 GO

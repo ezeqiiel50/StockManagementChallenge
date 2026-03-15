@@ -11,7 +11,7 @@ namespace StockManager.Data.Repositories
 {
     public class AuthRepository(ILogger<AuthRepository> logger, AppDbContext context) : IAuthRepository
     {
-        public async Task<Result<UserData>> GetUserByUswerName(string userName)
+        public async Task<Result<UserData>> GetUserByUserName(string userName)
         {
             try
             {

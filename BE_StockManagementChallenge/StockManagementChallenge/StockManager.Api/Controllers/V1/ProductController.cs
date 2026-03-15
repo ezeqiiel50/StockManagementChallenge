@@ -1,5 +1,4 @@
-﻿using Azure.Core;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ROP.APIExtensions;
@@ -27,9 +26,11 @@ namespace StockManagerApi.Controllers.V1
         }
 
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> GetAll()
         {
-            return new string[] { "value1", "value2" };
+            var query = new StockManager.Application.UsesCases.Product.GetAll.ProductGettAllQuery();
+            var product = await _mediator.Send(query);
+            return product.ToActionResult();
         }
 
         [HttpPost]
@@ -40,7 +41,6 @@ namespace StockManagerApi.Controllers.V1
             return product.ToActionResult();
         }
 
-        // PUT api/<ProductController>/5
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] ProductRequest request)
         {
@@ -53,6 +53,14 @@ namespace StockManagerApi.Controllers.V1
         public async Task<IActionResult> Delete(int id)
         {
             var cmmd = new StockManager.Application.UsesCases.Product.Delete.ProductDeleteCommand(id);
+            var product = await _mediator.Send(cmmd);
+            return product.ToActionResult();
+        }
+
+        [HttpGet("filter/{monto}")]
+        public async Task<IActionResult> GetByFilter(int monto)
+        {
+            var cmmd = new StockManager.Application.UsesCases.Product.GetByFilter.ProductGetByFilterQuery(monto);
             var product = await _mediator.Send(cmmd);
             return product.ToActionResult();
         }

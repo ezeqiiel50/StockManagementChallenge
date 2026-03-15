@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockManager.Data", "StockM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockManager.Api", "StockManager.Api\StockManager.Api.csproj", "{E7BE078C-4F0E-9D3B-BFBE-B7BD8D00B356}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockManager.Test", "StockManager.Test\StockManager.Test.csproj", "{BF715FCA-496A-4ABB-993E-1951359D0354}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{E7BE078C-4F0E-9D3B-BFBE-B7BD8D00B356}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7BE078C-4F0E-9D3B-BFBE-B7BD8D00B356}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7BE078C-4F0E-9D3B-BFBE-B7BD8D00B356}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF715FCA-496A-4ABB-993E-1951359D0354}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF715FCA-496A-4ABB-993E-1951359D0354}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF715FCA-496A-4ABB-993E-1951359D0354}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF715FCA-496A-4ABB-993E-1951359D0354}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +58,7 @@ Global
 		{5FC7CB27-9AAE-444D-B9B9-16FBC5063CFC} = {97227D69-098C-4B6E-BCE4-9DA8809BAE36}
 		{861D64A1-A260-48E6-8CA9-6B86569689CC} = {D0BCD5AF-5026-4CBF-BEF8-C491CE944FDA}
 		{E7BE078C-4F0E-9D3B-BFBE-B7BD8D00B356} = {C70F3B8D-D0AD-49E4-9C70-8874C2157774}
+		{BF715FCA-496A-4ABB-993E-1951359D0354} = {823F026E-491F-4DFF-8F2D-56B9662DFB45}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5F319DA0-C5C6-48B3-A3F7-E0ABB5096554}
