@@ -18,18 +18,17 @@ Arquitectura basada en **feature folders** para facilitar la escalabilidad del p
 ---
 
 # 📁 Estructura del proyecto
-src
-│
-├── app
-├── api
-├── features
-│ ├── auth
-│ └── products
-├── pages
-├── routes
-├── App.jsx
-└── main.jsx
 
+```
+src/
++-- app/
++-- api/
++-- features/
+¦   +-- auth/
+¦   +-- products/
++-- pages/
++-- routes/
+```
 
 ---
 
