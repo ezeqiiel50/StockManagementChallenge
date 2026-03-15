@@ -1,17 +1,18 @@
-# 📦 Stock Manager Frontend
+# 📦Stock Manager Frontend
 
 Frontend del challenge **Stock Manager**, desarrollado con React, Vite y Redux Toolkit.  
-La aplicación consume una API REST para autenticación y gestión de productos.
+La aplicacion consume una API REST para autenticacion y gestion de productos.
 
 ---
 
-# 🚀 Tecnologías utilizadas
+# 🚀Tecnologias utilizadas
 
 - React
 - Redux Toolkit
 - React Router
 - Axios
 - Vite
+- Tailwind CSS
 
 Arquitectura basada en **feature folders** para facilitar la escalabilidad del proyecto.
 
@@ -24,56 +25,81 @@ src/
 +-- app/
 +-- api/
 +-- features/
-¦   +-- auth/
-¦   +-- products/
+|   +-- auth/
+|   +-- products/
 +-- pages/
 +-- routes/
++-- components/
 ```
 
 ---
 
-# 🔐 Autenticación
+# Estilos
 
-La autenticación se realiza mediante **JWT**.
+La aplicacion utiliza **Tailwind CSS** para los estilos, integrado mediante el plugin oficial `@tailwindcss/vite`.
+
+### Configuracion
+
+El plugin se configura en `vite.config.js`:
+
+### Layout
+
+Se utiliza un componente `Layout.jsx` que incluye el `Sidebar` y envuelve todas las rutas protegidas mediante `<Outlet />` de React Router.
+
+```
+Layout
+  +-- Sidebar (navegacion lateral)
+  +-- Outlet (contenido de cada pagina)
+```
+
+### Sidebar
+
+El componente `Sidebar.jsx` centraliza la navegacion entre pantallas usando `NavLink` de React Router, resaltando automaticamente la ruta activa.
+
+---
+
+# 🔐Autenticacion
+
+La autenticacion se realiza mediante **JWT**.
 
 Flujo:
 
 ```
 Login
   ↓
-API devuelve token
+  API devuelve token
   ↓
-token guardado en localStorage
+  token guardado en localStorage
   ↓
-Redux guarda token en estado global
+  Redux guarda token en estado global
 ```
 
-Las rutas están protegidas mediante **ProtectedRoute**.
-
-Si el usuario no está autenticado:
+Las rutas estan protegidas mediante **ProtectedRoute**.
+Si el usuario no esta autenticado:
 
 ```
-/products → redirige a /
+/products → redirige a / (Pantalla login)
 ```
 
 ---
 
-# 🧭 Navegación
+# 🧭Navegacipon
 
 Rutas principales:
 
-| Ruta | Descripción |
+| Ruta | Descripcion |
 |-----|-------------|
 | `/` | Login |
 | `/products` | Listado de productos |
 | `/products/new` | Crear producto |
 | `/products/edit/:id` | Editar producto |
+| `/products/filter` | Filtrado de productos |
 
 ---
 
-# 📦 Gestión de productos (ABM)
+# Gestion de productos (ABM)
 
-La aplicación permite:
+La aplicacion permite:
 
 ### ✔ Listar productos
 Obtiene la lista desde la API.
@@ -85,7 +111,7 @@ Formulario reutilizable para crear productos.
 El mismo formulario detecta el `id` en la URL y carga el producto desde la API.
 
 ### ✔ Eliminar producto
-Elimina el producto desde el listado y actualiza el estado global.
+Elimina el producto desde el listado y actualiza el estado global. Mientras se procesa la eliminaci贸n se muestra un overlay con spinner que bloquea la pantalla.
 
 ---
 
@@ -93,51 +119,47 @@ Elimina el producto desde el listado y actualiza el estado global.
 
 Pantalla para obtener productos filtrados por monto.
 
-El usuario ingresa un monto y la aplicación consulta el endpoint correspondiente.
+El usuario ingresa un monto y la aplicacion consulta el endpoint correspondiente. Los resultados se muestran como cards destacando la mejor combinacion de productos disponibles, junto con el total de la combinacion.
+
+En caso de no existir una combinacion posible, se muestra el mensaje devuelto por la API.
 
 ---
 
-# 🌐 Axios Client
+# 🌐Axios Client
 
 Se utiliza un cliente centralizado de **Axios**.
 
 ### Funcionalidades
 
-- Agrega automáticamente el **token JWT** en cada request.
-- Maneja errores globales de autenticación.
+- Agrega automaticamente el **token JWT** en cada request.
+- Maneja errores globales de autenticacion.
 
-### 🔒 Manejo de expiración de token
+### Manejo de expiracion de token
 
 Cuando la API responde con:
+```
 401 Unauthorized
+```
 Se ejecuta un interceptor que:
-remove token
-redirect login
+- Elimina el token del almacenamiento
+- Redirige al login
 
-### 🧠 Manejo de estado
+### Manejo de estado
 
 El estado global se maneja con Redux Toolkit.
+
 Slices implementados:
-Auth Slice
-	Maneja:
-		login
-		logout
-		token
-		loading
-		error
-Product Slice
-	Maneja:
-		listado de productos
-		producto seleccionado
-		loading
-		errores
-		acciones CRUD
-		
-### 🧪 Manejo de errores
+
+**Auth Slice** Maneja: login, logout, token, loading, error
+
+**Product Slice** Maneja: listado de productos, producto seleccionado, items filtrados, loading, errores, acciones CRUD
+
+### Manejo de errores
 
 Los errores provenientes de la API se muestran en la UI.
 Ejemplo de respuesta de API:
 
+```json
 {
   "value": null,
   "errors": [
@@ -147,17 +169,29 @@ Ejemplo de respuesta de API:
   ],
   "success": false
 }
+```
+
 El mensaje se muestra al usuario.
 
-### ▶️ Instalación
+---
 
-1° Clonar el repositorio:
+# ▶️ Instalacion
+
+1° Clonar el repositorio
 2° Instalar dependencias:
-	npm install
+```bash
+npm install
+```
 3° Ejecutar proyecto:
-	npm run dev
-
-La aplicación estará disponible en:
+```bash
+npm run dev
+```
+La aplicaci0n estaria disponible en:
+```
 http://localhost:5173
+```
+
 La URL base de la API se encuentra en:
+```
 src/api/axiosClient.js
+```
