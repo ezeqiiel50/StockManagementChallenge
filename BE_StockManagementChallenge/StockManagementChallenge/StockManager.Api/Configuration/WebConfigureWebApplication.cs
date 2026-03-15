@@ -9,6 +9,7 @@ namespace StockManagerApi.Configuration
         {
             app.ConfigureSwagger()
                .ConfigureRedirection()
+               .ConfigureCors()
                .ConfigureAuthorization()
                .ConfigureControllers()
                .ConfigureLogger()
@@ -54,6 +55,11 @@ namespace StockManagerApi.Configuration
         private static WebApplication ConfigureControllers(this WebApplication app)
         {
             app.MapControllers();
+            return app;
+        }
+        private static WebApplication ConfigureCors(this WebApplication app)
+        {
+            app.UseCors("AllowAll");
             return app;
         }
     }
