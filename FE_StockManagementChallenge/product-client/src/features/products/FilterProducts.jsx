@@ -6,11 +6,27 @@ export default function FilterProducts() {
   const dispatch = useDispatch()
   const { items = [], loading, error } = useSelector(state => state.products)
   const [param, setParam] = useState('')
+   const [errors, setErrors] = useState({ precio: '' })
 
   const handleSearch = () => {
     if (!param || isNaN(parseInt(param))) return
+    if (!validateForm()) return
     dispatch(filterProducts(parseInt(param)))
   }
+
+   const validateForm = () => {
+    const newErrors = { param: '' }
+    let isValid = true
+
+    const precioNum = parseInt(param)
+    if (isNaN(precioNum) || precioNum < 1 || precioNum > 1000000) {
+        newErrors.param = 'El precio debe ser un número entre 1 y 1.000.000'
+        isValid = false
+    }
+
+  setErrors(newErrors)
+  return isValid
+}
 
   return (
     <>
@@ -19,8 +35,15 @@ export default function FilterProducts() {
           type="number"
           placeholder="Ingresá un monto..."
           value={param}
-          onChange={(e) => setParam(e.target.value)}
-        />
+          required
+          onChange={(e) => {
+              const value = e.target.value
+              if (value === '' || (parseInt(value) >= 1 && parseInt(value) <= 1000000)) {
+                setParam(value)
+              }
+            }}
+          />
+          {errors.param && <p style={{ color: 'red' }}>{errors.param}</p>}
         <button onClick={handleSearch}>Buscar</button>
       </div>
 
