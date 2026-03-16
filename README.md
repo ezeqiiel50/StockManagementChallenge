@@ -67,13 +67,14 @@ http://localhost:<puerto>
 
 ### Autenticación
 
-La API usa **JWT Bearer**. Para acceder a los endpoints protegidos:
+La API usa **JWT Bearer**. Tiene una duracion de 30min de vigencia, luego la app les solicitara ingresar las credenciales nuevamente.
+Para acceder a los endpoints protegidos:
 
 1. Hacer POST a `/api/auth/login` con las credenciales
 	
 	credenciales para pruebas:
-	`user: admin, password: admin123`
-	`user: tester, password: tester123`
+	`user: admin, password: admin123
+	 user: tester, password: tester123`
 	
 2. Copiar el token de la respuesta
 3. Incluirlo en los headers de cada request:
